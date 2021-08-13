@@ -4,7 +4,9 @@ const config = {
   // 病毒生成的时间间隔
   interval: 800,
   // 病毒动画的速度
-  speed: 3
+  speed: 3,
+  // 下一个增长的数值
+  grow:0.25,
 }
 
 let score = 0;
@@ -128,6 +130,7 @@ const showWarning = () => {
 }
 
 const gameOverAlert = q('#game-over-alert')
+const nextOverAlert = q('#game-next-alert')
 
 // 游戏结束
 const gameOver = () => {
@@ -136,6 +139,15 @@ const gameOver = () => {
   config.status = 2
   gameOverAlert.style.display = "block"
 }
+
+// 下一关
+const gameNext = () => {
+  clearInterval(timer)
+  clearInterval(updater)
+  config.status = 3
+  nextOverAlert.style.display = "block"
+}
+
 
 const scoreLabel = q("#score-label")
 const xmEffect = q("#xm")
@@ -162,8 +174,8 @@ window.addEventListener("keyup", function (e) {
       virues.splice(i, 1)
       score++
       scoreLabel.innerHTML = score
-      if (score === 30) {
-
+      if (score === 10) {
+        gameNext()
       }
       // 播放消灭音效
       xmEffect.currentTime = 0
@@ -180,13 +192,35 @@ restartBtn.addEventListener("click", () => {
   resetGame()
 })
 
+
+
 const resetGame = () => {
   config.status = 1
   score = 0
   scoreLabel.innerHTML = score
   game.innerHTML = ''
-  virues.length  = 0
+  virues.length = 0
+  config.speed = 3
   uiLayer.removeChild(document.querySelector('.warning'))
   uiLayer.warning = false
+  startGame()
+}
+
+const nextBtn = q("#next-btn")
+nextBtn.addEventListener("click", () => {
+  nextOverAlert.style.display = "none"
+  nextGame()
+})
+
+// 下一关
+const nextGame = () => {
+  config.status = 1
+  score = 0
+  scoreLabel.innerHTML = score
+  game.innerHTML = ''
+  virues.length = 0
+  uiLayer.warning = false
+  // 设置速度
+  config.speed += config.speed * config.grow
   startGame()
 }
