@@ -162,7 +162,9 @@ window.addEventListener("keyup", function (e) {
       virues.splice(i, 1)
       score++
       scoreLabel.innerHTML = score
+      if (score === 30) {
 
+      }
       // 播放消灭音效
       xmEffect.currentTime = 0
       xmEffect.play()
@@ -183,7 +185,7 @@ const resetGame = () => {
   score = 0
   scoreLabel.innerHTML = score
   game.innerHTML = ''
-  virues = []
+  virues.length  = 0
   uiLayer.removeChild(document.querySelector('.warning'))
   uiLayer.warning = false
   startGame()
