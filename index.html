@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,24 +7,40 @@
   <title>消灭病毒</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-  <!-- 游戏操作元素 -->
-  <div id="game"></div>
-  <div id="ui">
-    <div id="start-alert">
-      <div class="game-desc">
-        <img class="logo" src="./images/logo.png" alt="">
-        <p>屏幕上方有带字母的“病毒”落下，按下键盘对应的按键，消灭病毒，否则，你将被“病毒”消灭😈</p>
+  <div id="stage">
+    <!-- 游戏元素 -->
+    <div id="game"></div>
+    <!-- ui层 -->
+    <div id="ui">
+      <!-- 显示分数 -->
+      <div class="score-ui">
+        <img src="./images/vir.png" alt="">
+        <span id="score-label">0</span>
       </div>
-      <footer>
-        <div id="start-btn">点击屏幕开始游戏</div>
-        <p> Created By 胖虎 </p>
-      </footer>
+      <!-- 开始初始化 -->
+      <div id="start-alert">
+        <div class="game-desc">
+          <img class="logo" src="./images/logo.png" alt="">
+          <p>屏幕上方有带字母的“病毒”落下，按下键盘对应的按键，消灭病毒，否则，你将被“病毒”消灭😈</p>
+        </div>
+        <footer>
+          <div id="start-btn">点击屏幕开始游戏</div>
+          <p> Created By 胖虎 </p>
+        </footer>
+      </div>
+      <!-- 游戏失败 -->
+      <div id="game-over-alert">
+        <h1>任务失败</h1>
+        <div id="restart-btn">重 玩</div>
+      </div>
     </div>
+
   </div>
 
+  <audio src="./images/xm2.mp3" id="xm"></audio>
 
+  <script src="./js/main.js"></script>
 </body>
 
 </html>
