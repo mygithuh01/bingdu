@@ -101,11 +101,16 @@ const makeVirus = () => {
 }
 
 const winH = stage.offsetHeight;
-
+let ms = config.speed;
 const update = () => {
   for (let i = 0; i < virues.length; i++) {
-    let virus = virues[i]
-    virus.style.top = virus.offsetTop + config.speed + 'px'
+    const virus = virues[i]
+    if (!virus.speed) {
+      virus.speed = config.speed
+    } else {
+      virus.speed += virus.speed * 0.006
+    }
+    virus.style.top = virus.offsetTop + virus.speed + 'px'
     if (virus.offsetTop > (winH - 200) && !uiLayer.warning) {
       showWarning()
       uiLayer.warning = true
@@ -168,7 +173,7 @@ window.addEventListener("keyup", function (e) {
 
 // 重玩
 const restartBtn = q("#restart-btn")
-restartBtn.addEventListener("cilick", () => {
+restartBtn.addEventListener("click", () => {
   gameOverAlert.style.display = "none"
   resetGame()
 })
